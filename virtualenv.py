@@ -1456,16 +1456,12 @@ def install_activate(home_dir, bin_dir, prompt=None):
         files['activate'] = ACTIVATE_SH.replace('__VIRTUAL_ENV__', home_dir_sh)
 
     else:
-        files = {'activate': ACTIVATE_SH}
-
-        # suppling activate.fish in addition to, not instead of, the
-        # bash script support.
-        files['activate.fish'] = ACTIVATE_FISH
-
-        # same for csh/tcsh support...
-        files['activate.csh'] = ACTIVATE_CSH
-
-    files['activate_this.py'] = ACTIVATE_THIS
+        files = {'activate': ACTIVATE_SH,
+                 'inve': INVE_PY,
+                 'activate.fish': ACTIVATE_FISH,
+                 'activate.csh': ACTIVATE_CSH,
+                 'activate_this.py': ACTIVATE_THIS,
+                 }
     if hasattr(home_dir, 'decode'):
         home_dir = home_dir.decode(sys.getfilesystemencoding())
     vname = os.path.basename(home_dir)
@@ -1476,6 +1472,7 @@ def install_activate(home_dir, bin_dir, prompt=None):
         content = content.replace('__VIRTUAL_NAME__', vname)
         content = content.replace('__BIN_NAME__', os.path.basename(bin_dir))
         writefile(os.path.join(bin_dir, name), content)
+    make_exe(os.path.join(bin_dir, 'inve'))
 
 def install_distutils(home_dir):
     distutils_path = change_prefix(distutils.__path__[0], home_dir)
@@ -1813,6 +1810,50 @@ def convert(s):
     b = base64.b64decode(s.encode('ascii'))
     return zlib.decompress(b).decode('utf-8')
 
+##file inve.py
+INVE_PY = convert("""
+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
+3tlSrS+gcJ/L5mtqKACwQbP0JyrqmKg=
+""")
+
 ##file site.py
 SITE_PY = convert("""
 eJzFPf1z2zaWv/OvwMqToZTIdOJ0e3tOnRsncVrvuYm3SWdz63q0lARZrCmSJUjL2pu7v/3eBwAC
@@ -1960,21 +2001,12 @@ abV46zZtMMiZnWgPwBqF4P8ACHXrHw==
 
 ##file activate.sh
 ACTIVATE_SH = convert("""
-eJytVVFvokAQfudXTLEPtTlLeo9tvMSmJpq02hSvl7u2wRUG2QR2DSxSe7n/frOACEVNLlceRHa+
-nfl25pvZDswCnoDPQ4QoTRQsENIEPci4CsBMZBq7CAsuLOYqvmYKTTj3YxnBgiXBudGBjUzBZUJI
-BXEqgCvweIyuCjeG4eF2F5x14bcB9KQiQQWrjSddI1/oQIx6SYYeoFjzWIoIhYI1izlbhJjkKO7D
-M/QEmKfO9O7WeRo/zr4P7pyHwWxkwitcgwpQ5Ej96OX+PmiFwLeVjFUOrNYKaq1Nud3nR2n8nI2m
-k9H0friPTGVsUdptaxGrTEfpNVFEskxpXtUkkCkl1UNF9cgLBkx48J4EXyALuBtAwNYIjF5kcmUU
-abMKmMq1ULoiRbgsDEkTSsKSGFCJ6Z8vY/2xYiSacmtyAfCDdCNTVZoVF8vSTQOoEwSnOrngBkws
-MYGMBMg8/bMBLSYKS7pYEXP0PqT+ZmBT0Xuy+Pplj5yn4aM9nk72JD8/Wi+Gr98sD9eWSMOwkapD
-BbUv91XSvmyVkICt2tmXR4tWmrcUCsjWOpw87YidEC8i0gdTSOFhouJUNxR+4NYBG0MftoCTD9F7
-2rTtxG3oPwY1b2HncYwhrlmj6Wq924xtGDWqfdNxap+OYxplEurnMVo9RWks+rH8qKEtx7kZT5zJ
-4H7oOFclrN6uFe+d+nW2aIUsSgs/42EIPuOhXq+jEo3S6tX6w2ilNkDnIpHCWdEQhFgwj9pkk7FN
-l/y5eQvRSIQ5+TrL05lewxWpt/Lbhes5cJF3mLET1MGhcKCF+40tNWnUulxrpojwDo2sObdje3Bz
-N3QeHqf3D7OjEXMVV8LN3ZlvuzoWHqiUcNKHtwNd0IbvPGKYYM31nPKCgkUILw3KL+Y8l7aO1ArS
-Ad37nIU0fCj5NE5gQCuC5sOSu+UdI2NeXg/lFkQIlFpdWVaWZRfvqGiirC9o6liJ9FXGYrSY9mI1
-D/Ncozgn13vJvsznr7DnkJWXsyMH7e42ljdJ+aqNDF1bFnKWFLdj31xtaJYK6EXFgqmV/ymD/ROG
-+n8O9H8f5vsGOWXsL1+1k3g=
+eJxVUMFqAjEUvOcrhtWTdLvQa2lhBUGhtUWthZYSY5I1gWwim0TZfn3fqpfmkGTyXubNzAgbYyMa
+6zTaHBP2GjlqhbNNBkUMuZMae+srIZM9iaQLTJoutNiLaCZshD5kSOF9SOiyh01QttMyuZ4xfRIO
+O863i9Xmo37hs+WW84rz6WLJl/XrjID1J40y7hgTzoqIY6+CfCqOfTLBo2yvDwWjSRel0YTsFJRO
+NOMiAsIr/EZzh7Ox0sAIYhR0UEmGth3KyYh08Uc05FAK58hjCjjoNEimWxO6ARwFhXD7Fu+BT8oh
+5HQrJ+sPRPGvicg1xu/1Zg5phD/oiDOFKdSw9RiCoZGdjkdSrBWzDb5RehTjab2eFyjDFX2t53w7
+W60Xb8sCP3gceD0DrYuVssPDc6X0qfLZOdZY9gdYO5JX
 """)
 
 ##file activate.fish
@@ -1998,17 +2030,17 @@ hALufTAdmGl8B1H3VPd2af8fQAc4PgqjlIBL9cGQqNpXaAwe3LrtVn8AkZTUxg==
 
 ##file activate.csh
 ACTIVATE_CSH = convert("""
-eJx9VG1P2zAQ/u5fcYQKNgTNPtN1WxlIQ4KCUEGaxuQ6yYVYSuzKdhqVX7+zk3bpy5YPUXL3PPfc
-ne98DLNCWshliVDV1kGCUFvMoJGugMjq2qQIiVSxSJ1cCofD1BYRnOVGV0CfZ0N2DD91DalQSjsw
-tQLpIJMGU1euvPe7QeJlkKzgWixlhnAt4aoUVsLnLBiy5NtbJWQ5THX1ZciYKKWwkOFaE04dUm6D
-r/zh7pq/3D7Nnid3/HEy+wFHY/gEJydg0aFaQrBFgz1c5DG1IhTs+UZgsBC2GMFBlaeH+8dZXwcW
-VPvCjXdlAvCfQsE7al0+07XjZvrSCUevR5dnkVeKlFYZmUztG4BdzL2u9KyLVabTU0bdfg7a0hgs
-cSmUg6UwUiQl2iHrcbcVGNvPCiLOe7+cRwG13z9qRGgx2z6DHjfm/Op2yqeT+xvOLzs0PTKHDz2V
-tkckFHoQfQRXoGJAj9el0FyJCmEMhzgMS4sB7KPOE2ExoLcSieYwDvR+cP8cg11gKkVJc2wRcm1g
-QhYFlXiTaTfO2ki0fQoiFM4tLuO4aZrhOzqR4dIPcWx17hphMBY+Srwh7RTyN83XOWkcSPh1Pg/k
-TXX/jbJTbMtUmcxZ+/bbqOsy82suFQg/BhdSOTRhMNBHlUarCpU7JzBhmkKmRejKOQzayQe6MWoa
-n1wqWmuh6LZAaHxcdeqIlVLhIBJdO9/kbl0It2oEXQj+eGjJOuvOIR/YGRqvFhttUB2XTvLXYN2H
-37CBdbW2W7j2r2+VsCn0doVWcFG1/4y1VwBjfwAyoZhD
+eJx9VNtum0AQfecrJsSK2yiB9jWu2zoXqZFyU+REqppqvcAQVoJda3cxcr++e7ONLy0PCHbOnDMc
+ZuYYphVTULIaoWmVhgyhVVhAx3QFsRKtzBEyxlOaa7agGpNcVTGcllI0YB5Pk+gYfooWcsq50CBb
+DkxDwSTmul7a6JVEk1dAtoRrumAFwjWDy5oqBl8Kd1Bk398byuokF83XJIoiVsKHzzAew6ePoCvk
+UQTmojWjCgpclQJDjabkwTfyeHdNXm+fpy+TO/I0mf6AI5MKJyegUCNfgDuLB3u42GJablCwFxuB
+xIqqagQHVZ4f75+mfR2YG0vmerwr44D/FHLRkQ/ZSleBm4fXIBy/HV2cxlYp5oIX5ki21gAMnHuu
+9E7ny0LkQ+/eMbw4fSYl1rigXMOCSkazGlXiED2ObSVPsF8hxIT0XgmJ18h9P40xzvI+V/gvPY6U
+kMvbB/Iwub8h5CJkRJ7WdkVP0XtnRJ03cegUCJetwUgQThuEMRzKc1isFa6TrMIsowpd1lZh8cz2
+o6HZFfLeqjnmjNZmDBRCKSRMzAmHhr6zPEyDkAzVbhoiVFrPL9K067rkD2pa4MLOQapEqTsqMaWW
+Kd1K3Pm4TclvM6N1oPi32WxNsPXF/2XbMWDDwAtWRpun0F9Xoq0Lu0EYB2pb6JxxjdI1FVoFJgVv
+kOuzkGBwXcXyyrl2BgM/QWAWUmvar2TcbA3KzTJC6Cw3H+qQmRtjgGai1fZnhNEz2GVHl8m6WczQ
+hsiB5jgwh6ZFPT7eQgYO8/d/DVY+/YYtaM8HP+UrXH9zuWk0d10JDueNf/cAv2qiyPP8BeKLrBs=
 """)
 
 ##file activate.bat
